@@ -21,18 +21,18 @@ export default function SiteHeader() {
                             priority
                         />
                     </div>
-                    <span className="text-sm font-medium tracking-wide text-zinc-800">
+                    <span className="font-serif-semibold tracking-wide text-zinc-800">
                         ZF x NA
                     </span>
                 </Link>
 
                 {/* Desktop tabs */}
                 <div className="hidden items-center gap-4 text-sm text-zinc-600 sm:flex">
-                    <Link className="hover:text-zinc-900" href="/our-story">Our Story</Link>
-                    <Link className="hover:text-zinc-900" href="/venue">Venue</Link>
-                    <Link className="hover:text-zinc-900" href="/schedule">Schedule</Link>
-                    <Link className="hover:text-zinc-900" href="/contact">Contact</Link>
-                    <Link className="hover:text-zinc-900" href="/rsvp">RSVP</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/our-story">Our Story</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/venue">Venue</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/schedule">Schedule</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/contact">Contact</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/rsvp">RSVP</Link>
                 </div>
 
                 {/* Mobile dropdown button */}
