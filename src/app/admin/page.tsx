@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase";
 type Session = "Public" | "Private";
 type Filter = "All" | Session;
 type Sort = "newest" | "oldest" | "name_az";
+export const dynamic = "force-dynamic";
 
 type RsvpRow = {
     id: string;
