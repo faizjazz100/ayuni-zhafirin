@@ -7,7 +7,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif"
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Zhafirin & Ayuni",
+  title: "Ayuni & Zhafirin",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

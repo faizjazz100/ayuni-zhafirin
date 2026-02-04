@@ -7,15 +7,17 @@ import { motion } from "framer-motion";
 export default function HomePage() {
   // ✅ EDIT THESE (kept consistent)
   const DATE_TOP = "April 18, 2026";
-  const HASHTAG = "#ZHAFIRINAYUNI";
-  const COUPLE = "Zhafirin & Ayuni";
+  const HASHTAG = "#YUNIZHAF";
+  const COUPLE = "Ayuni & Zhafirin";
   const SUBLINE = "18.4.2026 | Luminare Hall, Petaling Jaya";
-  const RSVP_DEADLINE = "1 April 2026";
+  const RSVP_DEADLINE = "28 March 2026";
 
   // ✅ Contact
   const CONTACTS = [
     { name: "Zhafirin", phone: "019-211 2455" },
     { name: "Ayuni", phone: "019-211 3455" },
+    { name: "Darwish (Bride’s)", phone: "012-846 2690" },
+    { name: "Mai (Groom’s)", phone: "013-355 2455" }
   ];
 
   // ✅ Convert Malaysia phone (019xxxxxxx) -> 6019xxxxxxx for wa.me
@@ -45,7 +47,7 @@ export default function HomePage() {
             {/* Image */}
             <div className="relative h-[280px] sm:h-[360px] lg:h-[520px]">
               <Image
-                src="/hero.jpg"
+                src="/hero.jpeg"
                 alt="Wedding"
                 fill
                 priority
@@ -79,7 +81,7 @@ export default function HomePage() {
 
               <div className="mt-7">
                 <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">
-                  You’re Invited
+                  You’re invited to attend the solemnization ceremony between
                 </p>
                 <h2 className="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl">
                   {COUPLE}
