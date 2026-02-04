@@ -142,7 +142,7 @@ export default function HomePage() {
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             <InfoCard time="8:30 AM" title="Guest Arrival" />
             <InfoCard time="9:00 AM" title="Solemnisation Ceremony" />
-            <InfoCard time="10:30 AM" title="Mas Kahwin Exchange" />
+            <InfoCard time="10:00 AM" title="Arrival of guests" />
             <InfoCard time="12:30 PM" title="End of Ceremony" />
           </div>
         </motion.div>

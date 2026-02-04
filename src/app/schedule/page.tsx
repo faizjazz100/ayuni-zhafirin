@@ -89,16 +89,16 @@ export default function SchedulePage() {
 
                     <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                         <Link
-                            href="/rsvp"
-                            className="inline-flex items-center justify-center rounded-2xl bg-black px-5 py-3 text-sm text-white hover:opacity-90"
-                        >
-                            RSVP
-                        </Link>
-                        <Link
                             href="/"
                             className="inline-flex items-center justify-center rounded-2xl border border-zinc-300 bg-white px-5 py-3 text-sm hover:bg-zinc-50"
                         >
                             Back to Home
+                        </Link>
+                        <Link
+                            href="/rsvp"
+                            className="inline-flex items-center justify-center rounded-2xl bg-black px-5 py-3 text-sm text-white hover:opacity-90"
+                        >
+                            RSVP
                         </Link>
                     </div>
                 </motion.div>
