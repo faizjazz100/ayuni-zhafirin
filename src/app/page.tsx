@@ -59,7 +59,7 @@ export default function HomePage() {
 
               <div className="absolute bottom-4 left-4 right-4 rounded-3xl border border-white/25 bg-white/70 p-4 backdrop-blur sm:bottom-6 sm:left-6 sm:right-6">
                 <div className="text-xs uppercase tracking-[0.22em] text-zinc-600">
-                  The Solemnization Of test
+                  The Solemnization Of
                 </div>
                 <div className="mt-1 text-lg font-semibold text-zinc-900">
                   {COUPLE}
