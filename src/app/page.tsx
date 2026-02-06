@@ -59,6 +59,7 @@ export default function HomePage() {
                 {DATE_TOP}
               </div>
 
+              {/*
               <div className="absolute bottom-4 left-4 right-4 rounded-3xl border border-white/25 bg-white/70 p-4 backdrop-blur sm:bottom-6 sm:left-6 sm:right-6">
                 <div className="text-xs uppercase tracking-[0.22em] text-zinc-600">
                   The Solemnization Of
@@ -67,8 +68,8 @@ export default function HomePage() {
                   {COUPLE}
                 </div>
               </div>
+                          */}
             </div>
-
             {/* Text */}
             <div className="p-6 sm:p-10">
               <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">
@@ -140,8 +141,8 @@ export default function HomePage() {
           </div>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <InfoCard time="8:30 AM" title="Guest Arrival" />
-            <InfoCard time="9:00 AM" title="Solemnisation Ceremony" />
+            <InfoCard time="8:00 AM" title="Family Arrival" />
+            <InfoCard time="8:15 AM" title="Solemnisation Ceremony" />
             <InfoCard time="10:00 AM" title="Arrival of guests" />
             <InfoCard time="12:30 PM" title="End of Ceremony" />
           </div>

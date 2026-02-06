@@ -10,20 +10,13 @@ type Item = {
 };
 
 const items: Item[] = [
-    { time: "8:30 AM", title: "Guest arrival" },
+    { time: "8:00 AM", title: "Family arrival" },
     {
-        time: "9:00 AM",
+        time: "8:15 AM",
         title: "Solemnisation ceremony",
-        details: [
-            "Entrance of Dulang boys & Groom with the mother",
-            "Entrance of Dulang girls & Bride with the mother",
-            "Arrival of juru nikah",
-            "Ijab & Kabul"
-        ],
     },
     { time: "10:00 AM", title: "Arrival of guests", },
     { time: "10:30 AM", title: "Doa recital and opening remarks" },
-    { time: "10:45 AM", title: "Cake cutting" },
     { time: "11:00 AM", title: "Photo session" },
     { time: "12:30 PM", title: "End of ceremony" },
 ];
