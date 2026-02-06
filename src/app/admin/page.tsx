@@ -12,7 +12,9 @@ type RsvpRow = {
     id: string;
     full_name: string | null;
     phone: string | null;
-    guests: number | null;
+    guests: number | null; // total
+    adults: number | null;
+    kids: number | null;
     session: Session | null;
     created_at: string; // ISO
 };
@@ -30,7 +32,7 @@ export default function AdminPage() {
 
         let q = supabase
             .from("rsvps")
-            .select("id, full_name, phone, guests, session, created_at");
+            .select("id, full_name, phone, guests, adults, kids, session, created_at");
 
         // filter
         if (filter !== "All") q = q.eq("session", filter);
@@ -59,18 +61,31 @@ export default function AdminPage() {
 
     const totals = useMemo(() => {
         const submissions = rows.length;
-        const guests = rows.reduce((sum, r) => sum + (Number(r.guests) || 0), 0);
-        return { submissions, guests };
+
+        const totalGuests = rows.reduce((sum, r) => sum + (Number(r.guests) || 0), 0);
+        const totalAdults = rows.reduce((sum, r) => sum + (Number(r.adults) || 0), 0);
+        const totalKids = rows.reduce((sum, r) => sum + (Number(r.kids) || 0), 0);
+
+        return { submissions, totalGuests, totalAdults, totalKids };
     }, [rows]);
 
     function exportCSV() {
-        // columns you want
-        const headers = ["Full Name", "Phone", "Guests", "Session", "Submitted At"];
+        const headers = [
+            "Full Name",
+            "Phone",
+            "Guests",
+            "Adults",
+            "Kids",
+            "Session",
+            "Submitted At",
+        ];
 
         const lines = rows.map((r) => [
             r.full_name ?? "",
             r.phone ?? "",
             String(r.guests ?? 0),
+            String(r.adults ?? 0),
+            String(r.kids ?? 0),
             r.session ?? "",
             new Date(r.created_at).toLocaleString(),
         ]);
@@ -153,9 +168,11 @@ export default function AdminPage() {
                     </div>
 
                     {/* Totals */}
-                    <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    <div className="mt-6 grid gap-4 sm:grid-cols-4">
                         <StatCard label="Total submissions" value={totals.submissions} />
-                        <StatCard label="Total guests" value={totals.guests} />
+                        <StatCard label="Total guests" value={totals.totalGuests} />
+                        <StatCard label="Total adults" value={totals.totalAdults} />
+                        <StatCard label="Total kids" value={totals.totalKids} />
                     </div>
 
                     {/* Errors */}
@@ -168,12 +185,14 @@ export default function AdminPage() {
                     {/* Table */}
                     <div className="mt-6 overflow-hidden rounded-3xl border border-zinc-200">
                         <div className="overflow-x-auto bg-white ">
-                            <table className="w-full min-w-[820px] text-left text-sm">
+                            <table className="w-full min-w-[980px] text-left text-sm">
                                 <thead className="bg-zinc-50 text-zinc-600">
                                     <tr>
                                         <th className="px-5 py-4">Name</th>
                                         <th className="px-5 py-4">Phone</th>
                                         <th className="px-5 py-4">Guests</th>
+                                        <th className="px-5 py-4">Adults</th>
+                                        <th className="px-5 py-4">Kids</th>
                                         <th className="px-5 py-4">Session</th>
                                         <th className="px-5 py-4">Submitted</th>
                                     </tr>
@@ -182,13 +201,13 @@ export default function AdminPage() {
                                 <tbody>
                                     {loading ? (
                                         <tr>
-                                            <td className="px-5 py-6 text-zinc-600" colSpan={5}>
+                                            <td className="px-5 py-6 text-zinc-600" colSpan={7}>
                                                 Loading...
                                             </td>
                                         </tr>
                                     ) : rows.length === 0 ? (
                                         <tr>
-                                            <td className="px-5 py-6 text-zinc-600" colSpan={5}>
+                                            <td className="px-5 py-6 text-zinc-600" colSpan={7}>
                                                 No submissions found.
                                             </td>
                                         </tr>
@@ -204,16 +223,15 @@ export default function AdminPage() {
                                                 <td className="px-5 py-4 text-zinc-700">
                                                     {r.guests ?? 0}
                                                 </td>
+                                                <td className="px-5 py-4 text-zinc-700">
+                                                    {r.adults ?? 0}
+                                                </td>
+                                                <td className="px-5 py-4 text-zinc-700">
+                                                    {r.kids ?? 0}
+                                                </td>
                                                 <td className="px-5 py-4">
-                                                    <span
-                                                        className={[
-                                                            "inline-flex rounded-full px-3 py-1 text-xs font-medium",
-                                                            r.session === "Private"
-                                                                ? ""
-                                                                : "",
-                                                        ].join(" ")}
-                                                    >
-                                                        {r.session}
+                                                    <span className="inline-flex rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-700">
+                                                        {r.session ?? "-"}
                                                     </span>
                                                 </td>
                                                 <td className="px-5 py-4 text-zinc-600">
@@ -241,16 +259,13 @@ export default function AdminPage() {
 function StatCard({ label, value }: { label: string; value: number }) {
     return (
         <div className="rounded-3xl border border-zinc-200 bg-[#fbf7f3] p-6">
-            <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
-                {label}
-            </p>
+            <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">{label}</p>
             <p className="mt-2 text-3xl font-semibold text-zinc-900">{value}</p>
         </div>
     );
 }
 
 function csvEscape(v: string) {
-    // Escape quotes and wrap in quotes if needed
     const s = String(v ?? "");
     if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
     return s;

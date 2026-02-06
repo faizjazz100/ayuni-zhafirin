@@ -3,6 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWaze } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+
 
 export default function HomePage() {
   // ✅ EDIT THESE (kept consistent)
@@ -14,10 +18,10 @@ export default function HomePage() {
 
   // ✅ Contact
   const CONTACTS = [
-    { name: "Zhafirin", phone: "019-211 2455" },
-    { name: "Ayuni", phone: "019-211 3455" },
     { name: "Darwish (Bride’s)", phone: "012-846 2690" },
-    { name: "Mai (Groom’s)", phone: "013-355 2455" }
+    { name: "Tasha (Bride’s)", phone: "011-635 54265" },
+    { name: "Mai (Groom’s)", phone: "013-355 2455" },
+    { name: "Elin (Groom’s)", phone: "019-226 6996" }
   ];
 
   // ✅ Convert Malaysia phone (019xxxxxxx) -> 6019xxxxxxx for wa.me
@@ -55,7 +59,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
 
-              <div className="absolute left-4 top-4 rounded-2xl border border-white/30 bg-white/70 px-4 py-2 text-xs tracking-[0.25em] text-zinc-700 backdrop-blur sm:left-6 sm:top-6">
+              <div className="absolute left-4 top-4 rounded-2xl font-bold border border-white/30 bg-white/70 px-4 py-2 tracking-[0.25em] text-zinc-700 backdrop-blur sm:left-6 sm:top-6">
                 {DATE_TOP}
               </div>
 
@@ -72,7 +76,7 @@ export default function HomePage() {
             </div>
             {/* Text */}
             <div className="p-6 sm:p-10">
-              <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">
+              <p className="uppercase tracking-[0.28em] font-bold text-zinc-800">
                 {DATE_TOP}
               </p>
 
@@ -91,7 +95,7 @@ export default function HomePage() {
               </div>
 
               {/* RSVP (public only) */}
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href="/rsvp"
                   className="inline-flex items-center justify-center rounded-2xl bg-black px-5 py-3 text-sm text-white hover:opacity-90"
@@ -108,6 +112,30 @@ export default function HomePage() {
             </div>
           </div>
         </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-8 sm:px-6 sm:pb-10">
+        <div className="rounded-[28px] border border-zinc-200 bg-white p-6 shadow-sm sm:p-10">
+          <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">
+            Our Story
+          </p>
+          <h2 className="mt-2 font-serif text-3xl font-semibold">
+            How it all started
+          </h2>
+          <p className="mt-4 text-[15px] leading-7 text-zinc-700">
+            {/* Put your short preview here */}
+            They met two years ago on the same working pathway, where their daily
+            routines crossed without much thought. Both were focused on their
+            careers, exchanging nothing more than brief greetings and occasional
+            smiles, friendly acquaintances in a busy world..
+            <Link
+              href="/our-story"
+              className="items-center justify-center px-1 font-bold hover:opacity-90"
+            >
+              View more
+            </Link>
+          </p>
+        </div>
       </section>
 
       {/* DETAILS (keep as preview) */}
@@ -149,8 +177,49 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      <section id="venue" className="mx-auto max-w-6xl px-5 pb-8 sm:px-6 sm:pb-10">
+        <div className="rounded-[28px] border border-zinc-200 bg-white p-6 shadow-sm sm:p-10">
+          <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">
+            Venue
+          </p>
+
+          <h2 className="mt-2 font-serif text-2xl font-semibold sm:text-3xl">
+            Luminare Hall, Petaling Jaya
+          </h2>
+
+          <div className="mt-4 space-y-2 text-[15px] leading-7 text-zinc-700">
+            <p>
+              B-G-02, PJ TRADE CENTRE, 8, Jalan PJU 8/8A, Damansara Perdana, 47820 Petaling Jaya, Selangor
+            </p>
+          </div>
+
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="https://maps.app.goo.gl/dsUEjfK1u7NhSY386"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-2xl border border-zinc-300 bg-white px-5 py-3 text-sm text-zinc-800 hover:bg-zinc-50"
+            >
+
+              Open in Google Maps
+              <FontAwesomeIcon icon={faGoogle} className="px-1 h-5 w-5" />
+            </a>
+
+            <a
+              href="https://waze.com/ul/hw2860281s&navigate=yes"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-2xl bg-black px-5 py-3 text-sm text-white hover:opacity-90"
+              style={{ backgroundColor: "#0099FF" }} >
+              Open in Waze App
+              <FontAwesomeIcon icon={faWaze} className="px-1 h-7 w-7 text-black" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT (simple preview + link to full page) */}
-      <section className="mx-auto max-w-6xl px-5 pb-12 sm:px-6 sm:pb-14">
+      <section className="mx-auto max-w-6xl px-5 pb-8 sm:px-6 sm:pb-10">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}

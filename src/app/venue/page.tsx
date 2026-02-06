@@ -90,7 +90,7 @@ export default function LocationPage() {
 
                     {/* Helpful Notes */}
                     <div className="mt-6 rounded-3xl border border-zinc-200 bg-[#fbf7f3] p-6 text-sm text-zinc-700">
-                        <p className="font-medium">Tips</p>
+                        <p className="font-medium">Notes</p>
                         <ul className="mt-3 list-disc space-y-2 pl-5">
                             <li>Please arrive early for parking.</li>
                             <li>Follow signage at the venue entrance.</li>

@@ -34,7 +34,7 @@ export default function SchedulePage() {
                 <motion.div
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.55 }}
+                    transition={{ duration: 0.1 }}
                     className="rounded-[28px] border border-zinc-200 bg-white p-8 shadow-sm sm:p-10"
                 >
                     <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">

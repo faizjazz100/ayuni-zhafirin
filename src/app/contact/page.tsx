@@ -8,10 +8,10 @@ export default function ContactPage() {
     const COUPLE = "Zhafirin & Ayuni";
 
     const CONTACTS = [
-        { name: "Zhafirin", phoneDisplay: "019-211 2455", phoneE164: "60192112455" },
-        { name: "Ayuni", phoneDisplay: "019-876 5432", phoneE164: "60198765432" },
         { name: "Darwish (Bride’s)", phoneDisplay: "012-846 2690", phoneE164: "60128462690" },
+        { name: "Tasha (Bride’s)", phoneDisplay: "011-635 54265", phoneE164: "601163554265" },
         { name: "Mai (Groom’s)", phoneDisplay: "013-355 2455", phoneE164: "60133552455" },
+        { name: "Elin (Groom’s)", phoneDisplay: "019-226 6996", phoneE164: "60192266996" },
     ];
 
     return (

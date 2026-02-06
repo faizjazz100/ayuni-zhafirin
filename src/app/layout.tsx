@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import SiteHeader from "@/src/app/components/SiteHeader";
+import "./fontawesome";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });

@@ -28,11 +28,11 @@ export default function SiteHeader() {
 
                 {/* Desktop tabs */}
                 <div className="hidden items-center gap-4 text-sm text-zinc-600 sm:flex">
-                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/our-story">Our Story</Link>
-                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/venue">Venue</Link>
-                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/schedule">Schedule</Link>
-                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/contact">Contact</Link>
-                    <Link className="hover:text-zinc-900 mt-1 font-semibold" href="/rsvp">RSVP</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/rsvp">RSVP</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/our-story">Our Story</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/schedule">Schedule</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/venue">Venue</Link>
+                    <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/contact">Contact</Link>
                 </div>
 
                 {/* Mobile dropdown button */}
@@ -43,7 +43,7 @@ export default function SiteHeader() {
                     aria-expanded={open}
                     aria-controls="mobile-menu"
                 >
-                    Menu
+                    MENU
                     <span className="ml-2 text-xs">{open ? "▲" : "▼"}</span>
                 </button>
 
@@ -53,12 +53,12 @@ export default function SiteHeader() {
                         id="mobile-menu"
                         className="absolute right-0 top-12 z-50 w-56 overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-lg sm:hidden"
                     >
-                        <div className="p-2">
-                            <MobileItem href="/our-story" label="Our Story" onClick={() => setOpen(false)} />
-                            <MobileItem href="/venue" label="Venue" onClick={() => setOpen(false)} />
-                            <MobileItem href="/schedule" label="Schedule" onClick={() => setOpen(false)} />
-                            <MobileItem href="/contact" label="Contact" onClick={() => setOpen(false)} />
+                        <div className="p-2 uppercase font-Roboto">
                             <MobileItem href="/rsvp" label="RSVP" onClick={() => setOpen(false)} />
+                            <MobileItem href="/our-story" label="Our Story" onClick={() => setOpen(false)} />
+                            <MobileItem href="/schedule" label="Schedule" onClick={() => setOpen(false)} />
+                            <MobileItem href="/venue" label="Venue" onClick={() => setOpen(false)} />
+                            <MobileItem href="/contact" label="Contact" onClick={() => setOpen(false)} />
                         </div>
                     </div>
                 )}
