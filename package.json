@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.2.0",
     "@supabase/supabase-js": "^2.94.0",
+    "@vercel/analytics": "^1.6.1",
     "framer-motion": "^12.31.0",
     "next": "16.1.6",
     "react": "19.2.3",
