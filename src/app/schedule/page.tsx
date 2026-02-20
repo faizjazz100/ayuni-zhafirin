@@ -10,15 +10,15 @@ type Item = {
 };
 
 const items: Item[] = [
-    { time: "8:00 AM", title: "Family arrival" },
+    { time: "8:00 AM", title: "Family Arrival" },
     {
         time: "8:15 AM",
-        title: "Solemnisation ceremony",
+        title: "Solemnisation Ceremony",
     },
-    { time: "10:00 AM", title: "Arrival of guests", },
-    { time: "10:30 AM", title: "Doa recital and opening remarks" },
-    { time: "11:00 AM", title: "Photo session" },
-    { time: "12:30 PM", title: "End of ceremony" },
+    { time: "10:00 AM", title: "Arrival of Guests", },
+    { time: "10:30 AM", title: "Doa recital and Opening Remarks" },
+    { time: "11:00 AM", title: "Photo Session" },
+    { time: "12:30 PM", title: "End of Ceremony" },
 ];
 
 export default function SchedulePage() {
