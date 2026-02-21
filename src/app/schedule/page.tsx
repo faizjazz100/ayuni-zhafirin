@@ -16,7 +16,7 @@ const items: Item[] = [
         title: "Solemnisation Ceremony",
     },
     { time: "10:00 AM", title: "Arrival of Guests", },
-    { time: "10:30 AM", title: "Doa recital and Opening Remarks" },
+    { time: "10:30 AM", title: "Doa Recital & Opening Remarks" },
     { time: "11:00 AM", title: "Photo Session" },
     { time: "12:30 PM", title: "End of Ceremony" },
 ];
