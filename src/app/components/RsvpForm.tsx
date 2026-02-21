@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export type Session = "Public" | "Private";
 
+function normalizePhone(phone: string) {
+  return phone.replace(/\s|-/g, "");
+}
+
 function isValidPhone(phone: string) {
-  const cleaned = phone.replace(/\s|-/g, "");
-  return /^(?:\+?6?01)[0-9]{8,9}$/.test(cleaned);
+  // Accept: 01xxxxxxxx or +601xxxxxxxx
+  return /^(?:\+?6?01)[0-9]{8,9}$/.test(phone);
 }
 
 type Props = {
@@ -18,58 +22,33 @@ export default function RsvpForm({ session }: Props) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
 
-  // Total guests (your buttons)
   const [guests, setGuests] = useState(1);
+  const [adults, setAdults] = useState(1);
+  const kids = useMemo(() => Math.max(0, guests - adults), [guests, adults]);
+
+  const [message, setMessage] = useState("");
 
   const [status, setStatus] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  // Adults + Kids must sum to guests
-  const [adults, setAdults] = useState(1);
-  const [kids, setKids] = useState(0);
+  const guestOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  // Keep adults/kids always valid whenever total changes
-  useEffect(() => {
-    // Clamp adults to [0..guests]
-    if (adults > guests) setAdults(guests);
-
-    // After clamping adults, enforce kids = guests - adults if needed
-    const desiredKids = guests - Math.min(adults, guests);
-
-    // If kids is out of range or sum doesn't match, fix it
-    if (kids !== desiredKids) setKids(desiredKids);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [guests]);
-
-  // Adults options depend on total guests
   const adultOptions = useMemo(
-    () => Array.from({ length: guests + 1 }, (_, i) => i), // 0..guests
+    () => Array.from({ length: guests + 1 }, (_, i) => i),
     [guests]
   );
 
-  // Kids options depend on adults (so kids <= guests - adults)
-  const kidsOptions = useMemo(
-    () => Array.from({ length: guests - adults + 1 }, (_, i) => i), // 0..(guests-adults)
-    [guests, adults]
-  );
-
-  function handleAdultsChange(nextAdults: number) {
-    setAdults(nextAdults);
-    setKids(guests - nextAdults); // force sum exact
-  }
-
-  function handleKidsChange(nextKids: number) {
-    setKids(nextKids);
-    setAdults(guests - nextKids); // force sum exact
-  }
-
   function handleGuestsClick(n: number) {
     setGuests(n);
+    // clamp adults to [0..n]
+    setAdults((prev) => Math.min(prev, n));
+  }
 
-    // Keep current adults if possible, otherwise clamp
-    const newAdults = Math.min(adults, n);
-    setAdults(newAdults);
-    setKids(n - newAdults);
+  function handleAdultsChange(nextAdults: number) {
+    // clamp adults to [0..guests]
+    const clamped = Math.max(0, Math.min(nextAdults, guests));
+    setAdults(clamped);
   }
 
   async function submit(e: React.FormEvent) {
@@ -77,26 +56,41 @@ export default function RsvpForm({ session }: Props) {
     setStatus("");
     setPhoneError("");
 
-    const cleanedPhone = phone.replace(/\s|-/g, "");
+    const name = fullName.trim();
+    const cleanedPhone = normalizePhone(phone);
 
-    if (!isValidPhone(cleanedPhone)) {
-      setPhoneError("Please enter a valid Malaysian phone number (e.g. 0123456789)");
+    if (!name) {
+      setStatus("Please enter your full name.");
       return;
     }
 
+    if (!isValidPhone(cleanedPhone)) {
+      setPhoneError("Please enter a valid Malaysian phone number, example 0123456789.");
+      return;
+    }
+
+    const trimmedMessage = message.trim();
+    const safeMessage = trimmedMessage.length > 0 ? trimmedMessage.slice(0, 400) : null;
+
+    setSubmitting(true);
     setStatus("Submitting...");
 
     const { error } = await supabase.from("rsvps").insert({
-      full_name: fullName.trim(),
+      full_name: name,
       phone: cleanedPhone,
-      guests,  // total
-      adults,  // split
-      kids,    // split
+      guests,
+      adults,
+      kids,
       session,
+      message: safeMessage,
+      show_message: false,
     });
 
+
+    setSubmitting(false);
+
     if (error) {
-      setStatus("❌ Something went wrong. Please try again.");
+      setStatus(`❌ Something went wrong. ${error.message}`);
       return;
     }
 
@@ -105,7 +99,7 @@ export default function RsvpForm({ session }: Props) {
     setPhone("");
     setGuests(1);
     setAdults(1);
-    setKids(0);
+    setMessage("");
   }
 
   return (
@@ -137,13 +131,13 @@ export default function RsvpForm({ session }: Props) {
           placeholder="e.g. 0123456789"
           required
         />
-
         {phoneError && <p className="mt-2 text-sm text-red-600">{phoneError}</p>}
       </div>
+
       <div>
         <label className="text-sm text-zinc-600">Number of Guests</label>
         <div className="mt-2 grid grid-cols-5 gap-2">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+          {guestOptions.map((n) => (
             <button
               key={n}
               type="button"
@@ -162,14 +156,12 @@ export default function RsvpForm({ session }: Props) {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {/* Adults */}
         <div>
-          <label className="block text-sm mb-1">Adults</label>
+          <label className="block text-sm mb-1 text-zinc-600">Adults</label>
           <select
-            className="w-full rounded-lg border px-3 py-2 bg-white"
+            className="w-full rounded-2xl border border-zinc-200 bg-white px-3 py-3 text-sm"
             value={adults}
             onChange={(e) => handleAdultsChange(Number(e.target.value))}
-            required
           >
             {adultOptions.map((n) => (
               <option key={n} value={n}>
@@ -179,20 +171,13 @@ export default function RsvpForm({ session }: Props) {
           </select>
         </div>
 
-        {/* Kids */}
         <div>
-          <label className="block text-sm mb-1">Kids</label>
-          <select
-            className="w-full rounded-lg border px-3 py-2 bg-white"
+          <label className="block text-sm mb-1 text-zinc-600">Kids</label>
+          <input
+            className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-3 py-3 text-sm text-zinc-700"
             value={kids}
-            onChange={(e) => handleKidsChange(Number(e.target.value))}
-          >
-            {kidsOptions.map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
+            readOnly
+          />
         </div>
       </div>
 
@@ -200,11 +185,30 @@ export default function RsvpForm({ session }: Props) {
         Total {guests} = Adults {adults} + Kids {kids}
       </p>
 
+      <div>
+        <label className="block text-sm font-medium text-zinc-700">
+          Message or wish (optional)
+        </label>
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          rows={4}
+          maxLength={400}
+          className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none focus:border-zinc-400"
+          placeholder="Write a short wish..."
+        />
+        <p className="mt-1 text-xs text-zinc-500">{message.length}/400</p>
+      </div>
+
       <button
         type="submit"
-        className="w-full rounded-2xl bg-black p-3.5 text-white hover:opacity-90"
+        disabled={submitting}
+        className={[
+          "w-full rounded-2xl p-3.5 text-white",
+          submitting ? "bg-black/70" : "bg-black hover:opacity-90",
+        ].join(" ")}
       >
-        Submit RSVP
+        {submitting ? "Submitting..." : "Submit RSVP"}
       </button>
 
       {status && (

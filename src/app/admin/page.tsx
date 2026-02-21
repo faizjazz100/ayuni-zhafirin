@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
 type Session = "Public" | "Private";
@@ -126,6 +127,12 @@ export default function AdminPage() {
                         </div>
 
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                            <Link
+                                href="/admin/messages"
+                                className="rounded-2xl border border-zinc-300 bg-white px-4 py-3 text-sm hover:bg-zinc-50"
+                            >
+                                Manage Messages
+                            </Link>
                             {/* Filter */}
                             <select
                                 value={filter}
