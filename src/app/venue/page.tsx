@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function LocationPage() {
     // ✅ EDIT THESE
-    const COUPLE = "Zhafirin & Ayuni";
+    const COUPLE = "Ayuni & Zhafirin";
 
     const VENUE_NAME = "Luminare Hall";
     const ADDRESS_LINE_1 = "B-G-02, PJ TRADE CENTRE, 8, Jalan PJU 8/8A, Damansara Perdana,";

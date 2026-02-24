@@ -22,7 +22,7 @@ const items: Item[] = [
 ];
 
 export default function SchedulePage() {
-    const COUPLE = "Ayuni & Zhaf";
+    const COUPLE = "Ayuni & Zhafirin";
     return (
         <main className="min-h-screen text-zinc-800">
             {/* soft glow background */}

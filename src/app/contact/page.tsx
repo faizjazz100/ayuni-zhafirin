@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function ContactPage() {
     // ✅ EDIT THESE
-    const COUPLE = "Zhafirin & Ayuni";
+    const COUPLE = "Ayuni & Zhafirin";
 
     const CONTACTS = [
         { name: "Darwish (Bride’s)", phoneDisplay: "012-846 2690", phoneE164: "60128462690" },

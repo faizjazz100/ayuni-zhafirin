@@ -25,7 +25,7 @@ export default function OurStoryPage() {
                     </p>
 
                     <h1 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
-                        Zhafirin & Ayuni
+                        Ayuni & Zhafirin
                     </h1>
 
                     <p className="mt-4 text-sm text-zinc-600">
@@ -93,7 +93,7 @@ export default function OurStoryPage() {
                     </div>
 
                     <p className="mt-8 text-center text-sm text-zinc-500">
-                        © {new Date().getFullYear()} Zhafirin & Ayuni
+                        © {new Date().getFullYear()} Ayuni & Zhafirin
                     </p>
                 </motion.div>
             </section>
