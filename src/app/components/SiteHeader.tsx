@@ -38,7 +38,7 @@ export default function SiteHeader() {
                 {/* Mobile dropdown button */}
                 <button
                     type="button"
-                    className="inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm hover:bg-zinc-50 sm:hidden"
+                    className="inline-flex items-center justify-center rounded-2xl border border-white/40 bg-white/65 px-3 py-2 text-sm text-zinc-800 shadow-sm hover:bg-zinc-50 sm:hidden"
                     onClick={() => setOpen((v) => !v)}
                     aria-expanded={open}
                     aria-controls="mobile-menu"
@@ -51,7 +51,7 @@ export default function SiteHeader() {
                 {open && (
                     <div
                         id="mobile-menu"
-                        className="absolute right-0 top-12 z-50 w-56 overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-lg sm:hidden"
+                        className="absolute right-0 top-12 z-50 w-56 overflow-hidden rounded-3xl border border-white/40 bg-white shadow-lg sm:hidden"
                     >
                         <div className="p-2 uppercase font-Roboto">
                             <MobileItem href="/rsvp" label="RSVP" onClick={() => setOpen(false)} />

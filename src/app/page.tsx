@@ -5,12 +5,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWaze, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import Iridescence from "@/src/app/components/backgrounds/Iridescence";
 import MessageCarouselSection from "./components/MessageCarouselSection";
 
 export default function HomePage() {
   const DATE_TOP = "April 18, 2026";
-  const HASHTAG = "#ZHAFYUNI";
-  const COUPLE = "Ayuni & Zhaf";
+  const HASHTAG = "#YUNIZHAF";
+  const COUPLE = "Ayuni & Zhafirin";
   const SUBLINE = "18.4.2026 | Luminare Hall, Petaling Jaya";
   const RSVP_DEADLINE = "28 March 2026";
 
@@ -32,6 +33,7 @@ export default function HomePage() {
     <main className="min-h-screen text-zinc-900 selection:bg-black/10">
       {/* BACKGROUND */}
       <div className="pointer-events-none fixed inset-0 -z-10">
+        <Iridescence color={[0.3, 0.6, 1]} mouseReact amplitude={0.12} speed={1} />
         <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/45 to-white/75" />
         <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-black/5 blur-3xl" />
         <div className="absolute -right-40 bottom-[-180px] h-[520px] w-[520px] rounded-full bg-black/5 blur-3xl" />
