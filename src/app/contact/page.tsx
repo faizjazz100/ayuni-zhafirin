@@ -75,11 +75,9 @@ export default function ContactPage() {
                     </div>
 
                     <div className="mt-8 rounded-3xl border border-zinc-200 bg-[#fbf7f3] p-6 text-sm text-zinc-700">
-                        <p className="font-medium">Common questions</p>
+                        <p className="font-medium">Notes</p>
                         <ul className="mt-3 list-disc space-y-2 pl-5 text-zinc-700">
-                            <li>If you can’t attend, please still RSVP so we can update the list.</li>
-                            <li>For directions / parking, check the Location section on the Home page.</li>
-                            <li>If you received a private invite link, please use that link to RSVP.</li>
+                            <li>If you have any questions, please dont hesitate to contact us.</li>
                         </ul>
                     </div>
 

@@ -93,7 +93,6 @@ export default function LocationPage() {
                         <p className="font-medium">Notes</p>
                         <ul className="mt-3 list-disc space-y-2 pl-5">
                             <li>Please arrive early for parking.</li>
-                            <li>Follow signage at the venue entrance.</li>
                             <li>If you get lost, contact us from the Contact page.</li>
                         </ul>
                     </div>

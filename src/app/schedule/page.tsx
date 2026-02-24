@@ -22,6 +22,7 @@ const items: Item[] = [
 ];
 
 export default function SchedulePage() {
+    const COUPLE = "Ayuni & Zhaf";
     return (
         <main className="min-h-screen text-zinc-800">
             {/* soft glow background */}
@@ -94,6 +95,9 @@ export default function SchedulePage() {
                             RSVP
                         </Link>
                     </div>
+                    <footer className="mt-10 text-center text-sm text-zinc-600">
+                        © {new Date().getFullYear()} {COUPLE}
+                    </footer>
                 </motion.div>
             </section>
 
