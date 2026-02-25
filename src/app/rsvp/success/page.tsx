@@ -1,12 +1,16 @@
-"use client";
-
 import Link from "next/link";
 import PageShell from "@/src/app/components/PageShell";
-import { useSearchParams } from "next/navigation";
 
-export default function RsvpSuccessPage() {
-    const searchParams = useSearchParams();
-    const name = searchParams.get("name");
+export default async function RsvpSuccessPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+    const params = await searchParams;
+
+    const rawName = params?.name;
+    const name = Array.isArray(rawName) ? rawName[0] : rawName;
+
     return (
         <main className="min-h-screen px-5 py-16">
             <div className="mx-auto max-w-2xl text-center">
@@ -16,7 +20,7 @@ export default function RsvpSuccessPage() {
                     </p>
 
                     <h1 className="mt-4 font-serif text-3xl font-semibold sm:text-4xl">
-                        {name ? `${name}` : "RSVP Submitted"}
+                        {name ? `${name}` : ""}
                     </h1>
 
                     <p className="mt-6 text-zinc-600">
