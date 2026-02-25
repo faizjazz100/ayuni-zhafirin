@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
 
 export type Session = "Public" | "Private";
 
@@ -31,6 +32,7 @@ export default function RsvpForm({ session }: Props) {
   const [status, setStatus] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
 
   const guestOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -93,7 +95,7 @@ export default function RsvpForm({ session }: Props) {
       setStatus(`❌ Something went wrong. ${error.message}`);
       return;
     }
-
+    router.push(`/rsvp/success?name=${encodeURIComponent(name)}`);
     setStatus("✅ RSVP submitted. Thank you!");
     setFullName("");
     setPhone("");
@@ -105,7 +107,7 @@ export default function RsvpForm({ session }: Props) {
   return (
     <form onSubmit={submit} className="mt-6 space-y-5">
       <div>
-        <label className="text-sm text-zinc-600">Full Name</label>
+        <label className="text-sm text-zinc-800">Full Name</label>
         <input
           className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white p-3.5 outline-none focus:border-zinc-400"
           value={fullName}
@@ -115,7 +117,7 @@ export default function RsvpForm({ session }: Props) {
       </div>
 
       <div>
-        <label className="text-sm text-zinc-600">Phone Number</label>
+        <label className="text-sm text-zinc-800">Phone Number</label>
         <input
           className={[
             "mt-2 w-full rounded-2xl border bg-white p-3.5 outline-none",
@@ -135,7 +137,7 @@ export default function RsvpForm({ session }: Props) {
       </div>
 
       <div>
-        <label className="text-sm text-zinc-600">Number of Guests</label>
+        <label className="text-sm text-zinc-800">Number of Guests</label>
         <div className="mt-2 grid grid-cols-5 gap-2">
           {guestOptions.map((n) => (
             <button
@@ -157,7 +159,7 @@ export default function RsvpForm({ session }: Props) {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-sm mb-1 text-zinc-600">Adults</label>
+          <label className="block text-sm mb-1 text-zinc-800">Adults</label>
           <select
             className="w-full rounded-2xl border border-zinc-200 bg-white px-3 py-3 text-sm"
             value={adults}
@@ -172,7 +174,7 @@ export default function RsvpForm({ session }: Props) {
         </div>
 
         <div>
-          <label className="block text-sm mb-1 text-zinc-600">Kids</label>
+          <label className="block text-sm mb-1 text-zinc-800">Kids</label>
           <input
             className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-3 py-3 text-sm text-zinc-700"
             value={kids}
@@ -181,23 +183,23 @@ export default function RsvpForm({ session }: Props) {
         </div>
       </div>
 
-      <p className="text-sm text-zinc-600">
+      <p className="text-sm text-zinc-800">
         Total {guests} = Adults {adults} + Kids {kids}
       </p>
 
       <div>
-        <label className="block text-sm font-medium text-zinc-700">
-          Message or wish (optional)
+        <label className="block text-sm font-medium text-zinc-800">
+          Message or Wish (Optional)
         </label>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={4}
-          maxLength={400}
+          maxLength={250}
           className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none focus:border-zinc-400"
           placeholder="Write a short wish..."
         />
-        <p className="mt-1 text-xs text-zinc-500">{message.length}/400</p>
+        <p className="mt-1 text-xs text-zinc-500">{message.length}/250</p>
       </div>
 
       <button

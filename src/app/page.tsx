@@ -66,10 +66,10 @@ export default function HomePage() {
 
               <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
                 <div className="rounded-3xl border border-white/25 bg-white/35 p-4 ">
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/80">
+                  <p className="text-xs uppercase tracking-[0.28em] font-semibold text-zinc-900">
                     The Solemnization Of
                   </p>
-                  <p className="mt-1 font-serif text-2xl font-semibold text-white sm:text-3xl">
+                  <p className="mt-1 font-serif text-2xl font-semibold text-zinc-800 sm:text-3xl">
                     {COUPLE}
                   </p>
                 </div>
@@ -86,13 +86,13 @@ export default function HomePage() {
                 {HASHTAG}
               </h1>
 
-              <div className="mt-7">
+              <div className="mt-5">
                 <p className="text-sm uppercase tracking-[0.22em] text-zinc-600">
                   You’re invited to attend the solemnization ceremony between
                 </p>
 
-                <h2 className="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl">
-                  {COUPLE}
+                <h2 className="mt-3 font-serif text-2xl font-semibold leading-tight sm:text-3xl">
+                  Nur Ayuni Binti Mohd Sawal & Zhafirin Farhan Bin Zainal Alam
                 </h2>
 
                 <p className="mt-4 text-[15px] leading-7 text-zinc-700">
@@ -100,7 +100,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <PrimaryButton href="/rsvp">RSVP</PrimaryButton>
 
                 <div className="text-sm text-zinc-600">
@@ -228,7 +228,7 @@ export default function HomePage() {
               {CONTACTS.map((c) => (
                 <div
                   key={c.name}
-                  className="rounded-3xl border border-black/10 bg-white/70 p-6 backdrop-blur hover:bg-white/80"
+                  className="rounded-3xl border border-black/10 bg-white/65 p-6 hover:bg-white/80"
                 >
                   <p className="text-sm text-zinc-600">{c.name}</p>
                   <p className="mt-1 text-lg font-semibold text-zinc-900">

@@ -14,7 +14,7 @@ export default function AppBackground() {
                 color={[0.3, 0.6, 1]}
                 mouseReact
                 amplitude={0.12}
-                speed={1}
+                speed={0.5}
             />
 
             {/* soft white overlay */}

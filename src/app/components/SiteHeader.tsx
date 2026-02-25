@@ -6,7 +6,6 @@ import { useState } from "react";
 
 export default function SiteHeader() {
     const [open, setOpen] = useState(false);
-
     return (
         <header className="mx-auto max-w-6xl px-5 py-5 sm:px-6 bg-transparent">
             <nav className="relative flex items-center justify-between">
@@ -21,8 +20,8 @@ export default function SiteHeader() {
                             priority
                         />
                     </div>
-                    <span className="font-serif-semibold tracking-wide text-zinc-800">
-                        ZF x NA
+                    <span className="font-serif text-1xl font-semibold leading-tight tracking-wide text-zinc-800">
+                        NA x ZF
                     </span>
                 </Link>
 

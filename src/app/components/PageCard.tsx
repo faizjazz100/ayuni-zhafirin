@@ -14,7 +14,7 @@ export default function PageCard({
                 "border border-white/40",
                 "bg-white/65",
                 "shadow-[0_20px_60px_rgba(0,0,0,0.08)]",
-                "backdrop-blur-xl",
+                "backdrop-blur",
                 "p-6 sm:p-10",
                 className,
             ].join(" ")}
