@@ -69,7 +69,7 @@ export default function Iridescence({
 }: IridescenceProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mouse = useRef({ x: 0.5, y: 0.5 });
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | null>(null);
   const lastTime = useRef(0);
 
   useEffect(() => {
@@ -152,7 +152,9 @@ export default function Iridescence({
     // 🔥 Pause when tab hidden
     function handleVisibility() {
       if (document.hidden) {
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        if (rafRef.current !== null) {
+          cancelAnimationFrame(rafRef.current);
+        }
       } else {
         rafRef.current = requestAnimationFrame(update);
       }
@@ -161,7 +163,9 @@ export default function Iridescence({
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", handleVisibility);
       if (mouseReact) {
