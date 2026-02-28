@@ -86,9 +86,17 @@ export default function HomePage() {
                 {HASHTAG}
               </h1>
 
+              <h2 className="mt-3 font-serif text-xl font-semibold leading-tight sm:text-3xl">
+                Mohd Sawal Bin Md Zain &
+              </h2>
+              <h2 className="font-serif text-xl font-semibold leading-tight sm:text-3xl">
+                Cik Rosnani Binti Ismail
+              </h2>
+
               <div className="mt-5">
                 <p className="text-sm uppercase tracking-[0.22em] text-zinc-600">
-                  You’re invited to attend the solemnization ceremony between
+                  Cordially invite YBhg. Tan Sri/ Puan Sri/ Dato' Seri/ Datin Seri/ Dato' Sri/
+                  Datin Sri/ Datuk/ Dato'/ Datin/ Mr./ Mrs./ Sir/ Ms. to attend The Solemnization Ceremony between
                 </p>
 
                 <h2 className="mt-3 font-serif text-xl font-semibold leading-tight sm:text-3xl">
@@ -102,7 +110,7 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <PrimaryButton href="/rsvp">RSVP</PrimaryButton>
+                <PrimaryButton href="/rsvp">Click to RSVP</PrimaryButton>
 
                 <div className="text-sm text-zinc-600">
                   RSVP by{" "}
@@ -116,6 +124,17 @@ export default function HomePage() {
         </motion.section>
 
         <MessageCarouselSection />
+
+        {/* OUR STORY */}
+        <SectionCard className="mt-8">
+          <SectionHeader
+            label=""
+            title="Quote"
+          />
+          <p className="mt-4 text-[15px] leading-7 text-zinc-700">
+            A love that doesn’t start with a lightning strike, but rather with the steady rhythm of shared footsteps and daily routines.
+          </p>
+        </SectionCard>
 
         {/* DETAILS */}
         <motion.section
