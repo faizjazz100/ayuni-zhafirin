@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWaze, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import MessageCarouselSection from "./components/MessageCarouselSection";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import {
   Badge,
@@ -31,7 +33,33 @@ const CONTACTS = [
   { name: "Elin (Groom’s)", phone: "019-226 6996" },
 ];
 
+
 export default function HomePage() {
+  type GuestType = "public" | "private";
+
+  const searchParams = useSearchParams();
+
+  // IMPORTANT: default must match SSR output
+  const [guestType, setGuestType] = useState<GuestType>("public");
+
+  useEffect(() => {
+    const urlType = searchParams.get("type");
+
+    let nextType: GuestType = "public";
+
+    if (urlType === "private" || urlType === "public") {
+      nextType = urlType;
+      localStorage.setItem("guestType", nextType);
+    } else {
+      const stored = localStorage.getItem("guestType");
+      if (stored === "private" || stored === "public") nextType = stored;
+    }
+
+    // avoid “setState synchronously within an effect” warning:
+    queueMicrotask(() => setGuestType(nextType));
+  }, [searchParams]);
+
+  const rsvpHref = guestType === "private" ? "/rsvp-private" : "/rsvp";
   return (
     <main className="min-h-screen text-zinc-900 selection:bg-black/10">
       <div className="mx-auto max-w-6xl px-5 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-10">
@@ -99,7 +127,7 @@ export default function HomePage() {
               </div>
 
               <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <PrimaryButton href="/rsvp">Click to RSVP</PrimaryButton>
+                <PrimaryButton href={rsvpHref}>Click to RSVP</PrimaryButton>
                 <div className="text-sm text-zinc-600">
                   RSVP by <span className="font-semibold text-zinc-900">{RSVP_DEADLINE}</span>
                 </div>
