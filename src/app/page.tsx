@@ -41,6 +41,7 @@ export default function HomePage() {
 
       {/* WRAPPER */}
       <div className="mx-auto max-w-6xl px-5 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-10">
+
         {/* HERO */}
         <motion.section
           initial={{ opacity: 0, y: 14 }}
@@ -123,18 +124,14 @@ export default function HomePage() {
           </div>
         </motion.section>
 
-        <MessageCarouselSection />
-
         {/* OUR STORY */}
         <SectionCard className="mt-8">
-          <SectionHeader
-            label=""
-            title="Quote"
-          />
-          <p className="mt-4 text-[15px] leading-7 text-zinc-700">
-            A love that doesn’t start with a lightning strike, but rather with the steady rhythm of shared footsteps and daily routines.
+          <p className="text-[15px] leading-7 text-zinc-700">
+            “A love that doesn’t start with a lightning strike, but rather with the steady rhythm of shared footsteps and daily routines.”
           </p>
         </SectionCard>
+
+        <MessageCarouselSection />
 
         {/* DETAILS */}
         <motion.section
@@ -200,7 +197,7 @@ export default function HomePage() {
           <SectionCard>
             <SectionHeader
               label="Contact"
-              title="Contact"
+              title="Contacts"
               subtitle="If you have any questions, feel free to contact us."
               action={
                 <Link
