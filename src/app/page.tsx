@@ -91,15 +91,16 @@ export default function HomePage() {
                   You’re invited to attend the solemnization ceremony between
                 </p>
 
-                <h2 className="mt-3 font-serif text-2xl font-semibold leading-tight sm:text-3xl">
-                  Nur Ayuni Binti Mohd Sawal & Zhafirin Farhan Bin Zainal Alam
+                <h2 className="mt-3 font-serif text-xl font-semibold leading-tight sm:text-3xl">
+                  Nur Ayuni Binti Mohd Sawal &
                 </h2>
-
+                <h2 className="font-serif text-xl font-semibold leading-tight sm:text-3xl">
+                  Zhafirin Farhan Bin Zainal Alam
+                </h2>
                 <p className="mt-4 text-[15px] leading-7 text-zinc-700">
                   We would be honoured to celebrate this special day with you.
                 </p>
               </div>
-
               <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <PrimaryButton href="/rsvp">RSVP</PrimaryButton>
 
@@ -115,38 +116,6 @@ export default function HomePage() {
         </motion.section>
 
         <MessageCarouselSection />
-
-        {/* OUR STORY */}
-        <SectionCard className="mt-8">
-          <SectionHeader
-            label="Our Story"
-            title="How it all started"
-            action={
-              <Link
-                href="/our-story"
-                className="hidden rounded-2xl border border-black/10 bg-white/70 px-4 py-2 text-sm text-zinc-800 backdrop-blur hover:bg-white sm:inline-flex"
-              >
-                View more
-              </Link>
-            }
-          />
-
-          <p className="mt-4 text-[15px] leading-7 text-zinc-700">
-            They met two years ago on the same working pathway, where their daily
-            routines crossed without much thought. Both were focused on their
-            careers, exchanging nothing more than brief greetings and occasional
-            smiles, friendly acquaintances in a busy world.
-          </p>
-
-          <div className="mt-6 sm:hidden">
-            <Link
-              href="/our-story"
-              className="inline-flex w-full items-center justify-center rounded-2xl border border-black/10 bg-white/70 px-4 py-2 text-sm text-zinc-800 backdrop-blur hover:bg-white"
-            >
-              View more
-            </Link>
-          </div>
-        </SectionCard>
 
         {/* DETAILS */}
         <motion.section
@@ -254,11 +223,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-
-            <div className="mt-8 text-center text-sm text-zinc-600">
-              Thank you, see you there.
-            </div>
-
             <div className="mt-6 sm:hidden">
               <Link
                 href="/contact"

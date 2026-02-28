@@ -28,7 +28,6 @@ export default function SiteHeader() {
                 {/* Desktop tabs */}
                 <div className="hidden items-center gap-4 text-sm text-zinc-600 sm:flex">
                     <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/rsvp">RSVP</Link>
-                    <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/our-story">Our Story</Link>
                     <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/schedule">Schedule</Link>
                     <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/venue">Venue</Link>
                     <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/contact">Contact</Link>
@@ -54,7 +53,6 @@ export default function SiteHeader() {
                     >
                         <div className="p-2 uppercase font-Roboto">
                             <MobileItem href="/rsvp" label="RSVP" onClick={() => setOpen(false)} />
-                            <MobileItem href="/our-story" label="Our Story" onClick={() => setOpen(false)} />
                             <MobileItem href="/schedule" label="Schedule" onClick={() => setOpen(false)} />
                             <MobileItem href="/venue" label="Venue" onClick={() => setOpen(false)} />
                             <MobileItem href="/contact" label="Contact" onClick={() => setOpen(false)} />
