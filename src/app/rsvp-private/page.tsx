@@ -1,8 +1,17 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import RsvpForm from "@/src/app/components/RsvpForm";
 import PageShell from "@/src/app/components/PageShell";
 
-export default function RSVPPage() {
+export default async function RSVPPrivatePage() {
+    const cookieStore = await cookies();
+    const guestType = cookieStore.get("guestType")?.value;
+
+    if (guestType !== "private") {
+        redirect("/rsvp");
+    }
+
     return (
         <main className="min-h-screen text-zinc-800">
             <PageShell>
