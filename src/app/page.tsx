@@ -65,7 +65,7 @@ export default function HomePage() {
               </div>
 
               <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
-                <div className="rounded-3xl border border-white/25 bg-white/35 p-4 ">
+                <div className="rounded-3xl border border-white/25 bg-white/75 p-4 ">
                   <p className="text-xs uppercase tracking-[0.28em] font-semibold text-zinc-900">
                     The Solemnization Of
                   </p>
