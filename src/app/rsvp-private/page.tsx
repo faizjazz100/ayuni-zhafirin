@@ -22,7 +22,7 @@ export default async function RSVPPrivatePage() {
                     Confirm Attendance
                 </h1>
                 <p className="mt-2 font-semibold ">
-                    8:00AM - 12:00PM | 18.4.2026, Saturday | Luminare Hall, Petaling Jaya
+                    7:30AM - 1:00PM | 18.4.2026, Saturday | Luminare Hall, Petaling Jaya
                 </p>
                 <p className="mt-3 text-sm text-zinc-600">
                     This RSVP is for the <b>Private</b> session.
