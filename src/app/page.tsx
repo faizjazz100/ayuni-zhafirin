@@ -135,10 +135,10 @@ export default function HomePage() {
               action={<PrimaryButton href="/schedule">Open Full Schedule</PrimaryButton>}
             />
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <InfoCard time="8:00 AM" title="Family Arrival" />
-              <InfoCard time="8:15 AM" title="Solemnisation Ceremony" />
+              <InfoCard time="7:30 AM" title="Family Arrival" />
+              <InfoCard time="8:30 AM" title="Solemnisation Ceremony" />
               <InfoCard time="10:00 AM" title="Arrival of Guests" />
-              <InfoCard time="12:30 PM" title="End of Ceremony" />
+              <InfoCard time="1:00 PM" title="End of Ceremony" />
             </div>
           </SectionCard>
         </motion.section>
