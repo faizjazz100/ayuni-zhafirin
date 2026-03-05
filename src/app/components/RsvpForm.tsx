@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
 export type Session = "Public" | "Private";
+type GuestOf = "Bride" | "Groom";
 
 function normalizePhone(phone: string) {
   return phone.replace(/\s|-/g, "");
@@ -22,6 +23,9 @@ type Props = {
 export default function RsvpForm({ session }: Props) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
+
+  // ✅ NEW: Guest of (Bride/Groom)
+  const [guestOf, setGuestOf] = useState<GuestOf>("Bride");
 
   const [guests, setGuests] = useState(1);
   const [adults, setAdults] = useState(1);
@@ -67,12 +71,15 @@ export default function RsvpForm({ session }: Props) {
     }
 
     if (!isValidPhone(cleanedPhone)) {
-      setPhoneError("Please enter a valid Malaysian phone number, example 0123456789.");
+      setPhoneError(
+        "Please enter a valid Malaysian phone number, example 0123456789."
+      );
       return;
     }
 
     const trimmedMessage = message.trim();
-    const safeMessage = trimmedMessage.length > 0 ? trimmedMessage.slice(0, 400) : null;
+    const safeMessage =
+      trimmedMessage.length > 0 ? trimmedMessage.slice(0, 400) : null;
 
     setSubmitting(true);
     setStatus("Submitting...");
@@ -80,6 +87,7 @@ export default function RsvpForm({ session }: Props) {
     const { error } = await supabase.from("rsvps").insert({
       full_name: name,
       phone: cleanedPhone,
+      guest_of: guestOf, // ✅ NEW: save to DB (make sure column exists)
       guests,
       adults,
       kids,
@@ -88,17 +96,18 @@ export default function RsvpForm({ session }: Props) {
       show_message: false,
     });
 
-
     setSubmitting(false);
 
     if (error) {
       setStatus(`❌ Something went wrong. ${error.message}`);
       return;
     }
+
     router.push(`/rsvp/success?name=${encodeURIComponent(name)}`);
     setStatus("✅ RSVP submitted. Thank you!");
     setFullName("");
     setPhone("");
+    setGuestOf("Bride"); // ✅ reset
     setGuests(1);
     setAdults(1);
     setMessage("");
@@ -114,6 +123,19 @@ export default function RsvpForm({ session }: Props) {
           onChange={(e) => setFullName(e.target.value)}
           required
         />
+      </div>
+
+      {/* ✅ NEW: Guest of dropdown */}
+      <div>
+        <label className="text-sm text-zinc-800">Guest of</label>
+        <select
+          className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-3 text-sm outline-none focus:border-zinc-400"
+          value={guestOf}
+          onChange={(e) => setGuestOf(e.target.value as GuestOf)}
+        >
+          <option value="Bride">Bride (Ayuni)</option>
+          <option value="Groom">Groom (Zhafirin)</option>
+        </select>
       </div>
 
       <div>

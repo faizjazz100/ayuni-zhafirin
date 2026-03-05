@@ -18,7 +18,6 @@ export default function MessageCarouselSection() {
     const [idx, setIdx] = useState(0);
 
     const scrollerRef = useRef<HTMLDivElement | null>(null);
-    const userInteracting = useRef(false);
 
     const items = useMemo(() => {
         return (rows ?? [])
@@ -60,65 +59,61 @@ export default function MessageCarouselSection() {
         };
     }, []);
 
-    // Keep idx synced with scroll position
+    // ✅ Keep idx synced with scroll position (fix dot not following)
     useEffect(() => {
         const el = scrollerRef.current;
         if (!el) return;
 
+        // Find the currently-most-visible slide instead of relying on el.clientWidth.
+        const computeActive = () => {
+            const children = Array.from(el.children) as HTMLElement[];
+            if (children.length === 0) return;
+
+            const viewportCenter = el.scrollLeft + el.clientWidth / 2;
+
+            let bestIdx = 0;
+            let bestDist = Number.POSITIVE_INFINITY;
+
+            for (let i = 0; i < children.length; i++) {
+                const c = children[i];
+                const center = c.offsetLeft + c.clientWidth / 2;
+                const dist = Math.abs(center - viewportCenter);
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    bestIdx = i;
+                }
+            }
+
+            setIdx((prev) => (prev === bestIdx ? prev : bestIdx));
+        };
+
+        // rAF throttle for smooth swipe updates
+        let raf = 0;
         const onScroll = () => {
-            const cardW = el.clientWidth; // each card is 100% width
-            const next = Math.round(el.scrollLeft / Math.max(1, cardW));
-            setIdx((prev) => (prev === next ? prev : next));
+            if (raf) cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(computeActive);
         };
 
         el.addEventListener("scroll", onScroll, { passive: true });
-        return () => el.removeEventListener("scroll", onScroll as any);
-    }, []);
 
-    // Autoplay by scrolling to next card (native smooth)
-    useEffect(() => {
-        if (items.length <= 1) return;
-
-        const t = setInterval(() => {
-            if (userInteracting.current) return;
-            const el = scrollerRef.current;
-            if (!el) return;
-
-            const next = (idx + 1) % items.length;
-            el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
-        }, 4500);
-
-        return () => clearInterval(t);
-    }, [idx, items.length]);
-
-    // Pause autoplay while touching/dragging
-    useEffect(() => {
-        const el = scrollerRef.current;
-        if (!el) return;
-
-        const start = () => (userInteracting.current = true);
-        const end = () => {
-            userInteracting.current = false;
-        };
-
-        el.addEventListener("pointerdown", start);
-        el.addEventListener("pointerup", end);
-        el.addEventListener("pointercancel", end);
-        el.addEventListener("mouseleave", end);
+        // also compute once on mount + on resize (when widths change)
+        computeActive();
+        const onResize = () => computeActive();
+        window.addEventListener("resize", onResize);
 
         return () => {
-            el.removeEventListener("pointerdown", start);
-            el.removeEventListener("pointerup", end);
-            el.removeEventListener("pointercancel", end);
-            el.removeEventListener("mouseleave", end);
+            if (raf) cancelAnimationFrame(raf);
+            el.removeEventListener("scroll", onScroll as any);
+            window.removeEventListener("resize", onResize);
         };
-    }, []);
+    }, [items.length]);
+
+    // ✅ NO AUTOPLAY: removed setInterval + pointer listeners
 
     if (items.length === 0) return null;
 
     return (
         <section className="mt-8">
-            {/* keep your outer card, but remove extra blur layers */}
             <div className="rounded-[28px] border border-white/40 bg-white/65 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.08)] backdrop-blur-xl sm:p-10">
                 <div className="text-center">
                     <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-600">
@@ -133,7 +128,6 @@ export default function MessageCarouselSection() {
                 </div>
 
                 <div className="mt-8">
-                    {/* Native fast carousel */}
                     <div
                         ref={scrollerRef}
                         className="flex w-full snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-[24px] border border-black/10 bg-white/80 shadow-sm"
@@ -184,11 +178,17 @@ export default function MessageCarouselSection() {
                                 onClick={() => {
                                     const el = scrollerRef.current;
                                     if (!el) return;
-                                    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
+
+                                    // scroll to the actual slide (robust)
+                                    const child = el.children[i] as HTMLElement | undefined;
+                                    if (!child) return;
+                                    el.scrollTo({ left: child.offsetLeft, behavior: "smooth" });
                                 }}
                                 className={[
                                     "h-2 w-2 rounded-full transition",
-                                    i === idx ? "bg-zinc-900/70" : "bg-zinc-900/20 hover:bg-zinc-900/35",
+                                    i === idx
+                                        ? "bg-zinc-900/70"
+                                        : "bg-zinc-900/20 hover:bg-zinc-900/35",
                                 ].join(" ")}
                                 aria-label={`Go to message ${i + 1}`}
                             />
