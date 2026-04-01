@@ -22,7 +22,7 @@ const DATE_TOP = "April 18, 2026";
 const HASHTAG = "#YUNIZHAF";
 const COUPLE = "Ayuni & Zhafirin";
 const SUBLINE = "18.4.2026 | Luminare Hall, Petaling Jaya";
-const RSVP_DEADLINE = "28 March 2026";
+const RSVP_DEADLINE = "10 April 2026";
 
 const CONTACTS = [
   { name: "Darwish (Bride’s)", phone: "012-846 2690" },
