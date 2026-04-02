@@ -193,6 +193,18 @@ export default function AdminPage() {
 
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                             <Link
+                                href="/admin/v2"
+                                className="rounded-2xl border border-zinc-300 bg-white px-4 py-3 text-sm hover:bg-zinc-50"
+                            >
+                                Version 2
+                            </Link>
+                            <Link
+                                href="/admin/compact"
+                                className="rounded-2xl border border-zinc-300 bg-white px-4 py-3 text-sm hover:bg-zinc-50"
+                            >
+                                Compact Version
+                            </Link>
+                            <Link
                                 href="/admin/messages"
                                 className="rounded-2xl border border-zinc-300 bg-white px-4 py-3 text-sm hover:bg-zinc-50"
                             >

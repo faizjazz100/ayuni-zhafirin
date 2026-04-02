@@ -2,10 +2,30 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+import type { User } from "@supabase/supabase-js";
 
 export default function SiteHeader() {
     const [open, setOpen] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        // Get current session on mount
+        supabase.auth.getSession().then(({ data }) => {
+            setUser(data.session?.user ?? null);
+        });
+
+        // Stay in sync with login/logout
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => listener.subscription.unsubscribe();
+    }, []);
+
+    const isAdmin = !!user;
+
     return (
         <header className="mx-auto max-w-6xl px-5 py-5 sm:px-6 bg-transparent">
             <nav className="relative flex items-center justify-between">
@@ -31,6 +51,14 @@ export default function SiteHeader() {
                     <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/schedule">Schedule</Link>
                     <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/venue">Venue</Link>
                     <Link className="hover:text-zinc-900 mt-1 font-semibold uppercase" href="/contact">Contact</Link>
+                    {isAdmin && (
+                        <Link
+                            className="mt-1 font-semibold uppercase rounded-2xl border border-zinc-300 bg-white px-3 py-1.5 text-zinc-700 hover:bg-zinc-50 transition"
+                            href="/admin"
+                        >
+                            Admin
+                        </Link>
+                    )}
                 </div>
 
                 {/* Mobile dropdown button */}
@@ -56,12 +84,15 @@ export default function SiteHeader() {
                             <MobileItem href="/schedule" label="Schedule" onClick={() => setOpen(false)} />
                             <MobileItem href="/venue" label="Venue" onClick={() => setOpen(false)} />
                             <MobileItem href="/contact" label="Contact" onClick={() => setOpen(false)} />
+                            {isAdmin && (
+                                <MobileItem href="/admin" label="Admin" onClick={() => setOpen(false)} />
+                            )}
                         </div>
                     </div>
                 )}
             </nav>
 
-            {/* Click outside to close (simple version) */}
+            {/* Click outside to close */}
             {open && (
                 <button
                     aria-label="Close menu"
