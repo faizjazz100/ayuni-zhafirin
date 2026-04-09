@@ -126,12 +126,11 @@ export default function AdminMessagesPage() {
                     </div>
 
                     {/* ── Stat Pills ── */}
-                    <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         <MiniStat label="Total" value={counts.total} highlight />
                         <MiniStat label="Featured" value={counts.featured} dot="bg-amber-400" />
                         <MiniStat label="Hidden" value={counts.hidden} />
                     </div>
-
                     {/* ── Filter Pills ── */}
                     <div className="flex flex-wrap items-center gap-2">
                         <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-400 mr-1">
@@ -141,11 +140,10 @@ export default function AdminMessagesPage() {
                             <button
                                 key={f}
                                 onClick={() => setFilter(f)}
-                                className={`rounded-2xl border px-3.5 py-1.5 text-xs font-medium transition ${
-                                    filter === f
-                                        ? "border-black bg-black text-white"
-                                        : "border-zinc-300 bg-white text-zinc-600 hover:bg-zinc-50"
-                                }`}
+                                className={`rounded-2xl border px-3.5 py-1.5 text-xs font-medium transition ${filter === f
+                                    ? "border-black bg-black text-white"
+                                    : "border-zinc-300 bg-white text-zinc-600 hover:bg-zinc-50"
+                                    }`}
                             >
                                 {f === "all" ? "All" : f === "featured" ? "Featured" : "Hidden"}
                             </button>
@@ -215,9 +213,8 @@ function MessageCard({
     const isFeatured = row.show_message === true;
 
     return (
-        <div className={`flex flex-col rounded-2xl border p-4 transition-colors ${
-            isFeatured ? "border-amber-200 bg-amber-50/60" : "border-zinc-200 bg-white hover:border-zinc-300"
-        }`}>
+        <div className={`flex flex-col rounded-2xl border p-4 transition-colors ${isFeatured ? "border-amber-200 bg-amber-50/60" : "border-zinc-200 bg-white hover:border-zinc-300"
+            }`}>
             <div className="flex flex-wrap items-start justify-between gap-2">
                 <p className="font-medium text-zinc-900">{row.full_name || "—"}</p>
                 <p className="text-[11px] text-zinc-400">
@@ -241,11 +238,10 @@ function MessageCard({
                 <button
                     disabled={saving}
                     onClick={() => onToggle(!isFeatured)}
-                    className={`rounded-xl px-3.5 py-1.5 text-xs font-medium transition disabled:opacity-50 ${
-                        isFeatured
-                            ? "bg-amber-200 text-amber-900 hover:bg-amber-300"
-                            : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
-                    }`}
+                    className={`rounded-xl px-3.5 py-1.5 text-xs font-medium transition disabled:opacity-50 ${isFeatured
+                        ? "bg-amber-200 text-amber-900 hover:bg-amber-300"
+                        : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                        }`}
                 >
                     {saving ? "Saving…" : isFeatured ? "Unfeature" : "Feature"}
                 </button>
